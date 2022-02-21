@@ -1,14 +1,29 @@
-function UserItem({user}) {
+import {Link} from 'react-router-dom'
+import PropTypes from "prop-types";
+function UserItem({ user: { login, avatar_url } }) {
   return (
-    <div>
-      user
-      <h3>{user.id}</h3>
-      <p>{user.login}</p>
-      <div>
-          <img width={200} src={user.avatar_url} />
+    <div className="card shadow-md compact side bg-case-100">
+      <div className="flex-row items-center space-x-4 card-body">
+        <div>
+          <div className="avatar">
+            <div className="rounded-full shadow w-14 h-14">
+              <img width={200} src={avatar_url} alt={login}/>
+            </div>
+          </div>
+        </div>
+        <div>
+            <h2 className="card-title">{login}</h2>
+            <Link className="text-base-content text-opacity-40" to={`/users/${login}`}>
+                Visit Profile
+            </Link>
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default UserItem
+UserItem.propTypes = {
+  user: PropTypes.object.isRequired,
+};
+
+export default UserItem;
